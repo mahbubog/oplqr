@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const BottomCTA = () => {
@@ -14,15 +14,28 @@ const BottomCTA = () => {
           Join thousands of businesses already using our platform to grow their reach
         </p>
         
-        <Button 
-          asChild 
-          size="lg" 
-          className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-12 py-4 text-xl font-semibold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-        >
-          <Link to="/register">
-            Get Started Now <ArrowRight className="ml-2 h-6 w-6" />
-          </Link>
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Button 
+            asChild 
+            size="lg" 
+            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-12 py-4 text-xl font-semibold rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+          >
+            <Link to="/register">
+              Get Started Now <ArrowRight className="ml-2 h-6 w-6" />
+            </Link>
+          </Button>
+          <Button 
+            asChild 
+            variant="outline" 
+            size="lg"
+            className="border-2 border-white/30 text-white hover:bg-white/10 px-12 py-4 text-xl font-semibold rounded-full backdrop-blur-sm transition-all duration-300"
+          >
+            <Link to="/dashboard">
+              <BarChart3 className="mr-2 h-6 w-6" />
+              View Dashboard
+            </Link>
+          </Button>
+        </div>
       </div>
     </section>
   );

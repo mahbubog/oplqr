@@ -88,8 +88,8 @@ const Hero = () => {
               size="lg"
               className="border-2 border-white/30 text-white hover:bg-white/10 px-8 py-4 text-lg font-semibold rounded-full backdrop-blur-sm transition-all duration-300"
             >
-              <Link to="/login">
-                Login / Register
+              <Link to="/dashboard">
+                Go to Dashboard
               </Link>
             </Button>
           </div>
