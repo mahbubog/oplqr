@@ -4,92 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    rememberMe: false,
-  });
-  const navigate = useNavigate();
-  const { toast } = useToast();
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
-  };
-
-  const handleRememberMeChange = (checked: boolean) => {
-    setFormData({
-      ...formData,
-      rememberMe: checked,
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Basic validation
-    if (!formData.email || !formData.password) {
-      toast({
-        title: "Error",
-        description: "Please fill in all required fields",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    // Check if user exists (demo logic)
-    const existingUser = localStorage.getItem('user');
-    if (existingUser) {
-      const userData = JSON.parse(existingUser);
-      toast({
-        title: "Success",
-        description: `Welcome back, ${userData.name}!`,
-      });
-    } else {
-      // Create demo user if doesn't exist
-      localStorage.setItem('user', JSON.stringify({
-        name: "Demo User",
-        email: formData.email,
-        country: "bd",
-      }));
-      
-      toast({
-        title: "Success",
-        description: "Logged in successfully!",
-      });
-    }
-
-    // Navigate to dashboard
-    setTimeout(() => {
-      navigate('/dashboard');
-    }, 1000);
-  };
-
-  const handleGoogleLogin = () => {
-    // Simulate Google login
-    localStorage.setItem('user', JSON.stringify({
-      name: "Google User",
-      email: "user@gmail.com",
-      country: "bd",
-    }));
-
-    toast({
-      title: "Success",
-      description: "Logged in with Google successfully!",
-    });
-
-    setTimeout(() => {
-      navigate('/dashboard');
-    }, 1000);
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
@@ -102,10 +19,7 @@ const Login = () => {
           </CardHeader>
           
           <CardContent className="space-y-6">
-            <Button 
-              onClick={handleGoogleLogin}
-              className="w-full bg-white text-gray-900 border border-gray-300 hover:bg-gray-50 py-3"
-            >
+            <Button className="w-full bg-white text-gray-900 border border-gray-300 hover:bg-gray-50 py-3">
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                 <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -124,40 +38,20 @@ const Login = () => {
               </div>
             </div>
             
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-4">
               <div>
                 <Label htmlFor="email">Email</Label>
-                <Input 
-                  id="email" 
-                  type="email" 
-                  placeholder="Enter your email" 
-                  className="mt-1"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                />
+                <Input id="email" type="email" placeholder="Enter your email" className="mt-1" />
               </div>
               
               <div>
                 <Label htmlFor="password">Password</Label>
-                <Input 
-                  id="password" 
-                  type="password" 
-                  placeholder="Enter your password" 
-                  className="mt-1"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  required
-                />
+                <Input id="password" type="password" placeholder="Enter your password" className="mt-1" />
               </div>
               
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
-                  <Checkbox 
-                    id="remember" 
-                    checked={formData.rememberMe}
-                    onCheckedChange={handleRememberMeChange}
-                  />
+                  <Checkbox id="remember" />
                   <Label htmlFor="remember" className="text-sm">Remember me</Label>
                 </div>
                 <Link to="/forgot-password" className="text-sm text-purple-600 hover:underline">
@@ -165,13 +59,10 @@ const Login = () => {
                 </Link>
               </div>
               
-              <Button 
-                type="submit"
-                className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-3"
-              >
+              <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-3">
                 Sign In
               </Button>
-            </form>
+            </div>
             
             <div className="text-center">
               <p className="text-sm text-gray-600">
